@@ -4,7 +4,7 @@
 </p>
 
 <p align="center">
-  <img src="images/Screenshot(432).png" width="700" alt="Landing Page">
+  <img src="https://github.com/Priya-C-016/Sorting-Analyzer/blob/main/images/Screenshot%202025-07-13%20184543.png" width="700" alt="Landing Page">
 </p>
 
 ---
@@ -79,4 +79,20 @@ python bridge.py
 
 ### 📋 Algorithm Details Section
 > View time complexity, space usage, sorted output, and metrics for any algorithm.
-![Algorithm Details](images/Screenshot(431).png)
+![Algorithm Details](https://github.com/Priya-C-016/Sorting-Analyzer/blob/main/images/Screenshot%20(431).png)
+
+# Porject Structure
+sorting-analyzer/
+├── sort.cpp         # Sorting logic in C++
+├── bridge.py        # Python bridge (calls C++ and returns JSON)
+├── index.html       # Main frontend UI
+├── output.html      # (optional) output display file
+├── result.json      # Output JSON of sorting metrics
+├── assets/          # Screenshots for README
+└── README.md        # This file
+
+# Contributing
+Pull requests and issues are welcome!
+If you want to add more algorithms or visualization modes, feel free to fork and PR.
+
+<h3 align="center">✨ Happy Sorting! ✨</h3>
