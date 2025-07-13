@@ -4,7 +4,7 @@
 </p>
 
 <p align="center">
-  <img src="https://github.com/Priya-C-016/Sorting-Analyzer/blob/main/images/Screenshot%202025-07-13%20184543.png" width="700" alt="Landing Page">
+  <img src="https://github.com/Priya-C-016/Sorting-Analyzer/blob/main/images/Screenshot%20(432).png" width="700" alt="Landing Page">
 </p>
 
 ---
@@ -20,6 +20,17 @@
 - 💥 Handles up to 1000+ element arrays
 
 ---
+# Porject Structure
+```
+sorting-analyzer/
+├── sort.cpp         # Sorting logic in C++
+├── bridge.py        # Python bridge (calls C++ and returns JSON)
+├── index.html       # Main frontend UI
+├── output.html      # (optional) output display file
+├── result.json      # Output JSON of sorting metrics
+├── assets/          # Screenshots for README
+└── README.md        # This file
+```
 
 ## 📦 Tech Stack
 
@@ -81,18 +92,28 @@ python bridge.py
 > View time complexity, space usage, sorted output, and metrics for any algorithm.
 ![Algorithm Details](https://github.com/Priya-C-016/Sorting-Analyzer/blob/main/images/Screenshot%20(431).png)
 
-# Porject Structure
-sorting-analyzer/
-├── sort.cpp         # Sorting logic in C++
-├── bridge.py        # Python bridge (calls C++ and returns JSON)
-├── index.html       # Main frontend UI
-├── output.html      # (optional) output display file
-├── result.json      # Output JSON of sorting metrics
-├── assets/          # Screenshots for README
-└── README.md        # This file
 
 # Contributing
 Pull requests and issues are welcome!
 If you want to add more algorithms or visualization modes, feel free to fork and PR.
+
+<h2>🧠 Inspiration</h2>
+
+<table border="0">
+<tr>
+<td>
+
+Inspired by the curiosity of understanding algorithm performance and bringing **visual clarity** to classic Computer Science problems.  
+Built with ❤, logic, and a dash of ✨ JavaScript by **Priya**.
+
+</td>
+<td>
+
+<img src="https://github.com/Priya-C-016/PinkPetal/blob/main/public/images/girl.webp" width="250" alt="Sorting Visual Preview"/>
+
+</td>
+</tr>
+</table>
+
 
 <h3 align="center">✨ Happy Sorting! ✨</h3>
