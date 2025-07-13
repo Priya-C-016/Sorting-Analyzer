@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sorting Analyzer | Your Helper</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #f4f9ff;
+      padding: 30px;
+      color: #333;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px 0;
+      font-size: 2rem;
+      color: #2c3e50;
+      font-weight: bold;
+    }
+
+    .input-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 40px;
+      gap: 20px;
+    }
+
+    textarea {
+      width: 400px;
+      height: 100px;
+      padding: 15px;
+      border-radius: 10px;
+      border: 2px solid #3498db;
+      resize: none;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      padding: 15px 25px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .chart-section {
+      width: 80%;
+      margin: 50px auto;
+      display: none;
+    }
+
+    .details-section {
+      margin: 30px auto;
+      width: 80%;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+
+    .details-section h2 {
+      margin-bottom: 15px;
+      color: #2c3e50;
+    }
+
+    .details-section p {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <header>Sorting Analyzer | Your Helper</header>
+
+  <div class="input-section">
+    <textarea id="inputArray" placeholder="Enter array or vector like 5,1,4,2,8"></textarea>
+    <button onclick="analyzeSorting()">See Result</button>
+  </div>
+
+  <div class="chart-section">
+    <div id="bestAlgoBox" style="
+  background: #e8f9e8;
+  border: 2px solid #2ecc71;
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  display: none;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);">
+    </div>
+    <canvas id="barChart"></canvas>
+  </div>
+
+  <div class="details-section" id="algoDetails">
+    <h2>Algorithm Details</h2>
+    <p><strong>Name:</strong> <span id="algoName"></span></p>
+    <p><strong>Time Complexity:</strong> <span id="algoTime"></span></p>
+    <p><strong>Space Complexity:</strong> <span id="algoSpace"></span></p>
+    <p><strong>Comparisons:</strong> <span id="algoComp"></span></p>
+    <p><strong>Swaps:</strong> <span id="algoSwaps"></span></p>
+    <p><strong>Sorted Output:</strong> <span id="algoSorted"></span></p>
+  </div>
+
+  <script>
+
+    function analyzeSorting() {
+      const input = document.getElementById('inputArray').value;
+
+      fetch('/sort', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ array: input })
+      })
+        .then(res => res.json())
+        .then(data => {
+          console.log("DATA FROM BACKEND:", data);
+          renderChart(data);
+          const bestAlgoKey = getBestAlgorithm(data);
+          if (bestAlgoKey) {
+            const bestAlgo = data[bestAlgoKey];
+            const box = document.getElementById('bestAlgoBox');
+            box.innerHTML = `
+          🧠 <strong>Best Fit:</strong> ${bestAlgo.name}<br/>
+          ⏱️ Time: <strong>${bestAlgo.time_ms.toFixed(3)} ms</strong><br/>
+          🔁 Comparisons: ${bestAlgo.comparisons}, Swaps: ${bestAlgo.swaps}<br/>
+          📊 Complexity: ${bestAlgo.complexity}
+        `;
+            box.style.display = 'block';
+          } else {
+            document.getElementById('bestAlgoBox').style.display = 'none';
+          }
+        });
+    }
+
+    function renderChart(data) {
+      const ctx = document.getElementById('barChart').getContext('2d');
+      document.querySelector('.chart-section').style.display = 'block';
+
+      const labels = Object.keys(data);
+      const algoNames = labels.map(key => data[key].name);
+
+      // ⛳ FIX: Use .time_ms instead of .time
+      const times = labels.map(key => data[key].time_ms);
+      const comparisons = labels.map(key => data[key].comparisons);
+      const swaps = labels.map(key => data[key].swaps);
+
+      const minTime = Math.min(...times);
+      const timeColors = times.map(t => t === minTime ? '#36A2EB' : '#FFCE56');
+
+      if (window.myChart) {
+        window.myChart.destroy();
+      }
+
+      window.myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: algoNames,
+          datasets: [
+            {
+              label: 'Time (ms)',
+              data: times,
+              backgroundColor: timeColors,
+              borderRadius: 8,
+              yAxisID: 'yTime'
+            },
+            {
+              label: 'Comparisons',
+              data: comparisons,
+              backgroundColor: 'rgba(255, 99, 132, 0.6)',
+              borderRadius: 8,
+              yAxisID: 'yCount'
+            },
+            {
+              label: 'Swaps',
+              data: swaps,
+              backgroundColor: 'rgba(75, 192, 192, 0.6)',
+              borderRadius: 8,
+              yAxisID: 'yCount'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          interaction: {
+            mode: 'index',
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top'
+            },
+            title: {
+              display: true,
+              text: 'Sorting Algorithm Performance Comparison'
+            }
+          },
+          scales: {
+            yTime: {
+              type: 'linear',
+              display: true,
+              position: 'left',
+              title: {
+                display: true,
+                text: 'Time (ms)'
+              },
+              beginAtZero: true,
+              ticks: { color: '#36A2EB' },
+              grid: { drawOnChartArea: true }
+            },
+            yCount: {
+              type: 'linear',
+              display: true,
+              position: 'right',
+              title: {
+                display: true,
+                text: 'Comparisons / Swaps'
+              },
+              beginAtZero: true,
+              grid: { drawOnChartArea: false }
+            }
+          },
+          onClick: (e, elements) => {
+            if (elements.length) {
+              const index = elements[0].index;
+              const key = labels[index];
+              const info = data[key];
+
+              document.querySelector('.details-section').style.display = 'block';
+              document.getElementById('algoName').innerText = info.name;
+              document.getElementById('algoTime').innerText = info.complexity;
+              document.getElementById('algoSpace').innerText = info.space;
+              document.getElementById('algoComp').innerText = info.comparisons;
+              document.getElementById('algoSwaps').innerText = info.swaps;
+              document.getElementById('algoSorted').innerText = info.sorted.join(', ');
+            }
+          }
+        }
+      });
+    }
+
+    function getBestAlgorithm(data) {
+      let bestKey = null;
+      let minTime = Infinity;
+
+      for (let key in data) {
+        const algo = data[key];
+        if (algo.time_ms < minTime) {
+          minTime = algo.time_ms;
+          bestKey = key;
+        }
+      }
+
+      return bestKey;
+    }
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

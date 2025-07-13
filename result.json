@@ -1,0 +1,83 @@
+{
+  "Selection Sort": {
+    "name": "Selection Sort",
+    "time_ms": 0,
+    "comparisons": 861,
+    "swaps": 32,
+    "complexity": "Best/Worst: O(n^2)",
+    "space": "O(1)",
+    "sorted": [2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7, 23, 32, 45, 65, 67, 76, 87, 89, 89, 89, 235, 245, 543, 123456]
+  },
+  "Insertion Sort": {
+    "name": "Insertion Sort",
+    "time_ms": 0,
+    "comparisons": 225,
+    "swaps": 184,
+    "complexity": "Best: O(n), Worst: O(n^2)",
+    "space": "O(1)",
+    "sorted": [2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7, 23, 32, 45, 65, 67, 76, 87, 89, 89, 89, 235, 245, 543, 123456]
+  },
+  "Bubble Sort": {
+    "name": "Bubble Sort",
+    "time_ms": 0,
+    "comparisons": 861,
+    "swaps": 184,
+    "complexity": "Best: O(n), Worst: O(n^2)",
+    "space": "O(1)",
+    "sorted": [2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7, 23, 32, 45, 65, 67, 76, 87, 89, 89, 89, 235, 245, 543, 123456]
+  },
+  "Merge Sort": {
+    "name": "Merge Sort",
+    "time_ms": 0,
+    "comparisons": 172,
+    "swaps": 0,
+    "complexity": "Best/Worst: O(n log n)",
+    "space": "O(n)",
+    "sorted": [2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7, 23, 32, 45, 65, 67, 76, 87, 89, 89, 89, 235, 245, 543, 123456]
+  },
+  "Quick Sort": {
+    "name": "Quick Sort",
+    "time_ms": 0,
+    "comparisons": 334,
+    "swaps": 297,
+    "complexity": "Best: O(n log n), Worst: O(n^2)",
+    "space": "O(log n)",
+    "sorted": [2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7, 23, 32, 45, 65, 67, 76, 87, 89, 89, 89, 235, 245, 543, 123456]
+  },
+  "Heap Sort": {
+    "name": "Heap Sort",
+    "time_ms": 0,
+    "comparisons": 0,
+    "swaps": 194,
+    "complexity": "O(n log n)",
+    "space": "O(1)",
+    "sorted": [2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7, 23, 32, 45, 65, 67, 76, 87, 89, 89, 89, 235, 245, 543, 123456]
+  },
+  "Shell Sort": {
+    "name": "Shell Sort",
+    "time_ms": 0,
+    "comparisons": 218,
+    "swaps": 47,
+    "complexity": "Best: O(n log n), Worst: O(n^2)",
+    "space": "O(1)",
+    "sorted": [2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7, 23, 32, 45, 65, 67, 76, 87, 89, 89, 89, 235, 245, 543, 123456]
+  },
+  "Counting Sort": {
+    "name": "Counting Sort",
+    "time_ms": 1.002,
+    "comparisons": 42,
+    "swaps": 42,
+    "complexity": "Best/Worst: O(n + k)",
+    "space": "O(k)",
+    "sorted": [2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7, 23, 32, 45, 65, 67, 76, 87, 89, 89, 89, 235, 245, 543, 123456]
+  },
+  "Radix Sort": {
+    "name": "Radix Sort",
+    "time_ms": 0,
+    "comparisons": 252,
+    "swaps": 252,
+    "complexity": "Best/Worst: O(nk)",
+    "space": "O(n + k)",
+    "sorted": [2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7, 23, 32, 45, 65, 67, 76, 87, 89, 89, 89, 235, 245, 543, 123456]
+  }
+}

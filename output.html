@@ -1,0 +1,60 @@
+<!-- output.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sorting Performance Comparison</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .info { margin-top: 30px; border-top: 1px solid #ccc; padding-top: 20px; }
+    .info h2 { margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Sorting Algorithm Time Comparison</h1>
+  <canvas id="timeChart" width="600" height="300"></canvas>
+
+  <div class="info" id="algoInfo"></div>
+
+  <script>
+    fetch('result.json')
+      .then(response => response.json())
+      .then(data => {
+        const labels = Object.keys(data);
+        const times = labels.map(key => data[key].time);
+
+        const chart = new Chart(document.getElementById('timeChart'), {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Time (ms)',
+              data: times,
+              backgroundColor: ['#66b3ff', '#ffcc99'],
+            }]
+          },
+          options: {
+            onClick: (e, elements) => {
+              if (elements.length > 0) {
+                const index = elements[0].index;
+                const algo = labels[index];
+                const info = data[algo];
+
+                document.getElementById('algoInfo').innerHTML = `
+                  <h2>${algo.charAt(0).toUpperCase() + algo.slice(1)} Sort Details</h2>
+                  <p><strong>Sorted:</strong> ${info.sorted.join(', ')}</p>
+                  <p><strong>Comparisons:</strong> ${info.comparisons}</p>
+                  <p><strong>Swaps:</strong> ${info.swaps}</p>
+                  <p><strong>Time:</strong> ${info.time} ms</p>
+                  <p><strong>Time Complexity:</strong> Best: ${info.complexity.best}, Worst: ${info.complexity.worst}</p>
+                  <p><strong>Space Complexity:</strong> ${info.complexity.space}</p>
+                `;
+              }
+            }
+          }
+        });
+      });
+  </script>
+</body>
+</html>
